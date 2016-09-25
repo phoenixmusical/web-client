@@ -13,7 +13,10 @@ class Navigation extends Component {
         return (
             <Drawer
                 dock={true}
-                open={open}>
+                open={open}
+                containerStyle={{
+                    top: 50,
+                }}>
                 <MenuItem
                     containerElement={<Link to="/" />}
                     primaryText="Accueil" />

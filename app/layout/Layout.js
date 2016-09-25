@@ -24,13 +24,15 @@ class Layout extends Component {
         const { navigationOpen } = this.state;
         return (
             <div>
-                <Navigation
-                    view={view}
-                    open={navigationOpen} />
-                <div className={classNames(style.container, { [style.open]: navigationOpen })}>
-                    <Header
-                        onToggleNavigation={() => this.toggleNavigation()} />
-                    {children}
+                <Header
+                    onToggleNavigation={() => this.toggleNavigation()} />
+                <div className={style.container}>
+                    <Navigation
+                        view={view}
+                        open={navigationOpen} />
+                    <div className={classNames(style.content, { [style.open]: navigationOpen })}>
+                        {children}
+                    </div>
                 </div>
             </div>
         );
