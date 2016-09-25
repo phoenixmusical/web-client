@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import Relay from 'react-relay';
 import { Link } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
+import ComityMenuItem from './ComityMenuItem';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
     render () {
-        const { open } = this.props;
+        const { open, view } = this.props;
         return (
             <Drawer
                 dock={true}
@@ -17,7 +19,24 @@ export default class Navigation extends Component {
                     primaryText="Accueil" />
                 <Divider />
                 <Subheader>Comités</Subheader>
+                {view.comities.map((comity, index) => (
+                    <ComityMenuItem
+                        key={index}
+                        comity={comity} />
+                ))}
             </Drawer>
         );
     }
 }
+
+export default Relay.createContainer(Navigation, {
+    fragments: {
+        view: () => Relay.QL`
+            fragment on Query {
+                comities {
+                    ${ComityMenuItem.getFragment('comity')}
+                }
+            }
+        `,
+    },
+});

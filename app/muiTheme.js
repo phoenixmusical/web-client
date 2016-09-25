@@ -10,9 +10,6 @@ const muiTheme = getMuiTheme({
         accent2Color: grey100,
         accent3Color: orange500,
     },
-    appBar: {
-        height: 50,
-    },
 });
 
 export default muiTheme;

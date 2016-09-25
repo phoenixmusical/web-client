@@ -1,10 +1,5 @@
 import Relay from 'react-relay';
 
 export default {
-    comities: () => Relay.QL`query {
-      comities {
-        id,
-        name,
-      }
-    }`,
+    view: () => Relay.QL`query { view }`,
 };

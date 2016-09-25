@@ -47,6 +47,8 @@ type Query {
   comity(id: ID): Comity
   comities: [Comity]
   events: [Event]
+  view: Query
+  me: User
 }
 
 type User {

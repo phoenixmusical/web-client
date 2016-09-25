@@ -20,11 +20,12 @@ class Layout extends Component {
     }
 
     render () {
-        const { children } = this.props;
+        const { view, children } = this.props;
         const { navigationOpen } = this.state;
         return (
             <div>
                 <Navigation
+                    view={view}
                     open={navigationOpen} />
                 <div className={classNames(style.container, { [style.open]: navigationOpen })}>
                     <Header
@@ -38,9 +39,9 @@ class Layout extends Component {
 
 export default Relay.createContainer(Layout, {
     fragments: {
-        comities: () => Relay.QL`
+        view: () => Relay.QL`
             fragment on Query {
-                comities
+                ${Navigation.getFragment('view')}
             }
         `,
     },
