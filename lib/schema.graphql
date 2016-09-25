@@ -1,0 +1,59 @@
+type Comity {
+  id: ID
+  addedOn: String
+  updatedOn: String
+  addedBy: User
+  name: String
+  description: String
+  members: [User]
+  posts: [Post]
+  events: [Event]
+}
+
+type Event {
+  id: ID
+  addedOn: String
+  updatedOn: String
+  addedBy: User
+  name: String
+  description: String
+  startDate: String
+  endDate: String
+  comity: Comity
+}
+
+type Message {
+  id: ID
+  addedOn: String
+  updatedOn: String
+  addedBy: User
+  content: String
+  post: Post
+}
+
+type Post {
+  id: ID
+  addedOn: String
+  updatedOn: String
+  addedBy: User
+  name: String
+  importance: Int
+  comity: Comity
+  messages: [Message]
+}
+
+type Query {
+  user(id: ID): User
+  comity(id: ID): Comity
+  comities: [Comity]
+  events: [Event]
+}
+
+type User {
+  id: ID
+  email: String
+  firstname: String
+  lastname: String
+  name: String
+  comities: [Comity]
+}

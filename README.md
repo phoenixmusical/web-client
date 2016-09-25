@@ -1,2 +1,2 @@
 # web-client
-Phoenix Musical Web Client
+Phoenix Musical's Web Client
