@@ -6,7 +6,8 @@
   "scripts": {
     "stats": "webpack --profile --json > stats.json",
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "update-schema": "node lib/update-schema"
   },
   "repository": {
     "type": "git",

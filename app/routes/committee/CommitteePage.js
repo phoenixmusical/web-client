@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import Relay from 'react-relay';
 
-class ComityPage extends Component {
+class CommitteePage extends Component {
     render () {
-        const { comity } = this.props;
+        const { committee } = this.props;
         return (
             <div>
-                <h1>{comity.name}</h1>
+                <h1>{committee.name}</h1>
             </div>
         );
     }
 }
 
-export default Relay.createContainer(ComityPage, {
+export default Relay.createContainer(CommitteePage, {
     fragments: {
-        comity: () => Relay.QL`
-            fragment on Comity {
+        committee: () => Relay.QL`
+            fragment on Committee {
                 id,
                 name,
             }

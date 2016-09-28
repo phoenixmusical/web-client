@@ -1,4 +1,4 @@
-type Comity {
+type Committee {
   id: ID
   addedOn: String
   updatedOn: String
@@ -19,7 +19,7 @@ type Event {
   description: String
   startDate: String
   endDate: String
-  comity: Comity
+  committee: Committee
 }
 
 type Message {
@@ -38,17 +38,17 @@ type Post {
   addedBy: User
   name: String
   importance: Int
-  comity: Comity
+  committee: Committee
   messages: [Message]
 }
 
 type Query {
   user(id: ID): User
-  comity(id: ID): Comity
-  comities: [Comity]
+  committee(id: ID): Committee
+  committees: [Committee]
   events: [Event]
-  view: Query
   me: User
+  view: Query
 }
 
 type User {
@@ -57,5 +57,5 @@ type User {
   firstname: String
   lastname: String
   name: String
-  comities: [Comity]
+  committees: [Committee]
 }

@@ -1,9 +1,9 @@
 import Relay from 'react-relay';
 
 export default {
-    comity: () => Relay.QL`
+    committee: () => Relay.QL`
         query {
-            comity (id: $id)
+            committee (id: $id)
         }
     `,
 };

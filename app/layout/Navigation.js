@@ -5,7 +5,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
-import ComityMenuItem from './ComityMenuItem';
+import CommitteeMenuItem from './CommitteeMenuItem';
 
 class Navigation extends Component {
     render () {
@@ -22,10 +22,10 @@ class Navigation extends Component {
                     primaryText="Accueil" />
                 <Divider />
                 <Subheader>Comités</Subheader>
-                {view.comities.map((comity, index) => (
-                    <ComityMenuItem
+                {view.committees.map((committee, index) => (
+                    <CommitteeMenuItem
                         key={index}
-                        comity={comity} />
+                        committee={committee} />
                 ))}
             </Drawer>
         );
@@ -36,8 +36,8 @@ export default Relay.createContainer(Navigation, {
     fragments: {
         view: () => Relay.QL`
             fragment on Query {
-                comities {
-                    ${ComityMenuItem.getFragment('comity')}
+                committees {
+                    ${CommitteeMenuItem.getFragment('committee')}
                 }
             }
         `,
