@@ -7,6 +7,7 @@ export default class Header extends Component {
         return (
             <AppBar
                 title="Phoenix Musical"
+                style={{ position: 'fixed', top: 0, zIndex: 1400 }}
                 onLeftIconButtonTouchTap={onToggleNavigation} />
         );
     }

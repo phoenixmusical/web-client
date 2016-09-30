@@ -20,7 +20,7 @@ class Layout extends Component {
     }
 
     render () {
-        const { view, children } = this.props;
+        const { app, children } = this.props;
         const { navigationOpen } = this.state;
         return (
             <div>
@@ -28,7 +28,7 @@ class Layout extends Component {
                     onToggleNavigation={() => this.toggleNavigation()} />
                 <div className={style.container}>
                     <Navigation
-                        view={view}
+                        app={app}
                         open={navigationOpen} />
                     <div className={classNames(style.content, { [style.open]: navigationOpen })}>
                         {children}
@@ -41,9 +41,9 @@ class Layout extends Component {
 
 export default Relay.createContainer(Layout, {
     fragments: {
-        view: () => Relay.QL`
-            fragment on Query {
-                ${Navigation.getFragment('view')}
+        app: () => Relay.QL`
+            fragment on App {
+                ${Navigation.getFragment('app')}
             }
         `,
     },

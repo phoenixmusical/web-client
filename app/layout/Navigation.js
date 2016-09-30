@@ -9,7 +9,7 @@ import CommitteeMenuItem from './CommitteeMenuItem';
 
 class Navigation extends Component {
     render () {
-        const { open, view } = this.props;
+        const { open, app } = this.props;
         return (
             <Drawer
                 dock={true}
@@ -22,7 +22,7 @@ class Navigation extends Component {
                     primaryText="Accueil" />
                 <Divider />
                 <Subheader>Comités</Subheader>
-                {view.committees.map((committee, index) => (
+                {app.committees.map((committee, index) => (
                     <CommitteeMenuItem
                         key={index}
                         committee={committee} />
@@ -34,8 +34,8 @@ class Navigation extends Component {
 
 export default Relay.createContainer(Navigation, {
     fragments: {
-        view: () => Relay.QL`
-            fragment on Query {
+        app: () => Relay.QL`
+            fragment on App {
                 committees {
                     ${CommitteeMenuItem.getFragment('committee')}
                 }

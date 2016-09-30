@@ -1,20 +1,53 @@
-type Committee {
-  id: ID
-  addedOn: String
-  updatedOn: String
-  addedBy: User
-  name: String
-  description: String
-  members: [User]
-  posts: [Post]
+type App {
+  committees: [Committee]
   events: [Event]
 }
 
-type Event {
-  id: ID
+type Committee implements Node {
   addedOn: String
   updatedOn: String
   addedBy: User
+
+  # The ID of an object
+  id: ID!
+  name: String
+  description: String
+
+  # A committee members
+  members(after: String, first: Int, before: String, last: Int): UserConnection
+
+  # A committee posts
+  posts(after: String, first: Int, before: String, last: Int): PostConnection
+
+  # A committee events
+  events(after: String, first: Int, before: String, last: Int): EventConnection
+}
+
+# A connection to a list of items.
+type CommitteeConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [CommitteeEdge]
+}
+
+# An edge in a connection.
+type CommitteeEdge {
+  # The item at the end of the edge
+  node: Committee
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type Event implements Node {
+  addedOn: String
+  updatedOn: String
+  addedBy: User
+
+  # The ID of an object
+  id: ID!
   name: String
   description: String
   startDate: String
@@ -22,40 +55,159 @@ type Event {
   committee: Committee
 }
 
-type Message {
-  id: ID
-  addedOn: String
-  updatedOn: String
-  addedBy: User
-  content: String
-  post: Post
+# A connection to a list of items.
+type EventConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [EventEdge]
 }
 
-type Post {
-  id: ID
+# An edge in a connection.
+type EventEdge {
+  # The item at the end of the edge
+  node: Event
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+input LoginMutationInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type LoginMutationPayload {
+  user: User
+  clientMutationId: String
+}
+
+type Message implements Node {
   addedOn: String
   updatedOn: String
   addedBy: User
+
+  # The ID of an object
+  id: ID!
+  content: String
+}
+
+# A connection to a list of items.
+type MessageConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [MessageEdge]
+}
+
+# An edge in a connection.
+type MessageEdge {
+  # The item at the end of the edge
+  node: Message
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type Mutation {
+  login(input: LoginMutationInput!): LoginMutationPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Post implements Node {
+  addedOn: String
+  updatedOn: String
+  addedBy: User
+
+  # The ID of an object
+  id: ID!
   name: String
   importance: Int
+
+  # A post committee
   committee: Committee
-  messages: [Message]
+
+  # A post messages
+  messages(after: String, first: Int, before: String, last: Int): MessageConnection
+}
+
+# A connection to a list of items.
+type PostConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [PostEdge]
+}
+
+# An edge in a connection.
+type PostEdge {
+  # The item at the end of the edge
+  node: Post
+
+  # A cursor for use in pagination
+  cursor: String!
 }
 
 type Query {
-  user(id: ID): User
-  committee(id: ID): Committee
-  committees: [Committee]
-  events: [Event]
-  me: User
-  view: Query
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+  viewer: User
+  app: App
 }
 
-type User {
-  id: ID
+type User implements Node {
+  # The ID of an object
+  id: ID!
   email: String
   firstname: String
   lastname: String
   name: String
-  committees: [Committee]
+
+  # A user committees
+  committees(after: String, first: Int, before: String, last: Int): CommitteeConnection
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge
+  node: User
+
+  # A cursor for use in pagination
+  cursor: String!
 }
