@@ -81,9 +81,22 @@ switch (process.env.npm_lifecycle_event) {
             },
             parts.setupCSS(PATHS.style),
             parts.devServer({
-                // Customize host/port here if needed
                 host: process.env.HOST,
                 port: process.env.PORT,
+                proxy: {
+                    '/graphql': {
+                        target: 'http://localhost:3000',
+                        secure: false,
+                    },
+                    '/login': {
+                        target: 'http://localhost:3000/login',
+                        secure: false,
+                    },
+                    '/logout': {
+                        target: 'http://localhost:3000/logout',
+                        secure: false,
+                    },
+                },
             })
         );
 }

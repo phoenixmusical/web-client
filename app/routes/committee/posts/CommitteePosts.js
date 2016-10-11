@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Relay from 'react-relay';
 import { FormattedRelative } from 'react-intl';
+import { Link } from 'react-router';
 import moment from 'moment';
+import IconButton from 'material-ui/IconButton';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
@@ -54,6 +56,7 @@ class CommitteePosts extends Component {
                         daysMap[day].posts.map(post => (
                             <ListItem
                                 key={post.id}
+                                href={`/post/${post.id}`}
                                 primaryText={post.name}
                                 secondaryText={(
                                     <p>
@@ -61,7 +64,8 @@ class CommitteePosts extends Component {
                                             {post.addedBy.firstname}
                                         </span> -- {ellipsis(post.content, 50)}
                                     </p>
-                                )} />
+                                )}
+                                secondaryTextLines={2} />
                         )),
                         <Divider />,
                     ])}

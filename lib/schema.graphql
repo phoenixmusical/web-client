@@ -1,6 +1,6 @@
 type App {
   committees: [Committee]
-  events: [Event]
+  events(startDate: String, endDate: String): [Event]
 }
 
 type Committee implements Node {

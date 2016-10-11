@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { FormattedDate } from 'react-intl';
 import Subheader from 'material-ui/Subheader';
-import CommitteeCalendarEvent from './CommitteeCalendarEvent';
+import CalendarEvent from './CalendarEvent';
 
-export default class CommitteeCalendarDay extends Component {
+export default class CalendarDay extends Component {
     render () {
         const { date, events } = this.props;
         return (
@@ -13,12 +13,12 @@ export default class CommitteeCalendarDay extends Component {
                     background: '#fdfdfd',
                     margin: 2,
                 }}>
-                    <Subheader>
+                    <Subheader style={{ textAlign: 'center', padding: 0 }}>
                         <FormattedDate
                             weekday="long"
                             value={date} />
                     </Subheader>
-                    <div style={{ fontSize: 12, paddingLeft: 16, color: 'rgba(0, 0, 0, 0.54)' }}>
+                    <div style={{ fontSize: 12, textAlign: 'center', color: 'rgba(0, 0, 0, 0.54)' }}>
                         <FormattedDate
                             month="short"
                             day="2-digit"
@@ -26,7 +26,7 @@ export default class CommitteeCalendarDay extends Component {
                     </div>
                     <div style={{ overflow: 'auto', height: 250, padding: '12px 6px' }}>
                         {events.map(event => (
-                            <CommitteeCalendarEvent
+                            <CalendarEvent
                                 key={event.id}
                                 event={event} />
                         ))}
