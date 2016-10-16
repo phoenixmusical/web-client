@@ -1465,7 +1465,7 @@
           "description": null,
           "fields": [
             {
-              "name": "login",
+              "name": "addPost",
               "description": null,
               "args": [
                 {
@@ -1476,7 +1476,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "LoginMutationInput",
+                      "name": "AddPostInput",
                       "ofType": null
                     }
                   },
@@ -1485,7 +1485,34 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "LoginMutationPayload",
+                "name": "AddPostPayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "writeMessage",
+              "description": null,
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "WriteMessageInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "WriteMessagePayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1499,26 +1526,26 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "LoginMutationInput",
+          "name": "AddPostInput",
           "description": null,
           "fields": null,
           "inputFields": [
             {
-              "name": "email",
+              "name": "committeeId",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "ID",
                   "ofType": null
                 }
               },
               "defaultValue": null
             },
             {
-              "name": "password",
+              "name": "name",
               "description": null,
               "type": {
                 "kind": "NON_NULL",
@@ -1548,16 +1575,124 @@
         },
         {
           "kind": "OBJECT",
-          "name": "LoginMutationPayload",
+          "name": "AddPostPayload",
           "description": null,
           "fields": [
             {
-              "name": "user",
+              "name": "committee",
               "description": null,
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "User",
+                "name": "Committee",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "postEdge",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PostEdge",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "WriteMessageInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "postId",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "content",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "WriteMessagePayload",
+          "description": null,
+          "fields": [
+            {
+              "name": "post",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Post",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "messageEdge",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "MessageEdge",
                 "ofType": null
               },
               "isDeprecated": false,

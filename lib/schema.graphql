@@ -1,3 +1,15 @@
+input AddPostInput {
+  committeeId: ID!
+  name: String!
+  clientMutationId: String
+}
+
+type AddPostPayload {
+  committee: Committee
+  postEdge: PostEdge
+  clientMutationId: String
+}
+
 type App {
   committees: [Committee]
   events(startDate: String, endDate: String): [Event]
@@ -73,17 +85,6 @@ type EventEdge {
   cursor: String!
 }
 
-input LoginMutationInput {
-  email: String!
-  password: String!
-  clientMutationId: String
-}
-
-type LoginMutationPayload {
-  user: User
-  clientMutationId: String
-}
-
 type Message implements Node {
   addedOn: String
   updatedOn: String
@@ -113,7 +114,8 @@ type MessageEdge {
 }
 
 type Mutation {
-  login(input: LoginMutationInput!): LoginMutationPayload
+  addPost(input: AddPostInput!): AddPostPayload
+  writeMessage(input: WriteMessageInput!): WriteMessagePayload
 }
 
 # An object with an ID
@@ -210,4 +212,16 @@ type UserEdge {
 
   # A cursor for use in pagination
   cursor: String!
+}
+
+input WriteMessageInput {
+  postId: ID!
+  content: String!
+  clientMutationId: String
+}
+
+type WriteMessagePayload {
+  post: Post
+  messageEdge: MessageEdge
+  clientMutationId: String
 }

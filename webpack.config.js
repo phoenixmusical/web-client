@@ -89,11 +89,11 @@ switch (process.env.npm_lifecycle_event) {
                         secure: false,
                     },
                     '/login': {
-                        target: 'http://localhost:3000/login',
+                        target: 'http://localhost:3000',
                         secure: false,
                     },
                     '/logout': {
-                        target: 'http://localhost:3000/logout',
+                        target: 'http://localhost:3000',
                         secure: false,
                     },
                 },

@@ -22,13 +22,14 @@ class CommitteePosts extends Component {
         const { committee } = this.props;
         const posts = committee.posts.edges.map(edge => {
             const post = edge.node;
-            const message = post.messages.edges[0].node;
+            const messageEdges = post.messages.edges;
+            const message = messageEdges[0] ? messageEdges[0].node : null;
             return {
                 id: post.id,
                 name: post.name,
-                addedOn: new Date(Date.parse(message.addedOn)),
-                addedBy: message.addedBy,
-                content: message.content,
+                addedOn: new Date(Date.parse(message ? message.addedOn : post.addedOn)),
+                addedBy: message ? message.addedBy : post.addedBy,
+                content: message ? message.content : '',
             };
         });
         const daysMap = {};
@@ -47,7 +48,7 @@ class CommitteePosts extends Component {
         return (
             <div style={{ maxWidth: 360, width: '100%', border: 'solid 1px #d9d9d9' }}>
                 <List>
-                    {Object.keys(daysMap).sort().map(day => [
+                    {Object.keys(daysMap).sort().reverse().map(day => [
                         <Subheader key="date">
                             <FormattedRelative
                                 units="day"
@@ -56,7 +57,9 @@ class CommitteePosts extends Component {
                         daysMap[day].posts.map(post => (
                             <ListItem
                                 key={post.id}
-                                href={`/post/${post.id}`}
+                                containerElement={(
+                                    <Link to={`/post/${post.id}`} />
+                                )}
                                 primaryText={post.name}
                                 secondaryText={(
                                     <p>
@@ -84,6 +87,10 @@ export default Relay.createContainer(CommitteePosts, {
                         node {
                             id
                             name
+                            addedOn
+                            addedBy {
+                                firstname
+                            }
                             messages (last: 1) {
                                 edges {
                                     node {

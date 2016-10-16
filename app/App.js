@@ -14,7 +14,9 @@ addLocaleData([...frLocale]);
 injectTapEventPlugin();
 
 Relay.injectNetworkLayer(
-    new Relay.DefaultNetworkLayer('/graphql')
+    new Relay.DefaultNetworkLayer('/graphql', {
+        credentials: 'same-origin',
+    })
 );
 
 export default class App extends Component {

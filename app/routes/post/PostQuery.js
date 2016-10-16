@@ -6,4 +6,9 @@ export default {
             node (id: $id)
         }
     `,
+    viewer: () => Relay.QL`
+        query {
+            viewer
+        }
+    `,
 };
