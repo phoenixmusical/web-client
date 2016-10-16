@@ -23,6 +23,7 @@
     "babel-relay-plugin": "^0.9.3",
     "classnames": "^2.2.5",
     "history": "^4.2.0",
+    "linkify-it": "^1.2.4",
     "material-ui": "^0.15.4",
     "moment": "^2.15.1",
     "react": "^15.3.2",
@@ -32,7 +33,8 @@
     "react-relay": "^0.9.3",
     "react-router": "^2.8.1",
     "react-router-relay": "^0.13.5",
-    "react-tap-event-plugin": "^1.0.0"
+    "react-tap-event-plugin": "^1.0.0",
+    "tlds": "^1.166.0"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",

@@ -1,40 +1,76 @@
 import React, { Component } from 'react';
 import Relay from 'react-relay';
-import { FormattedDate } from 'react-intl';
-import Linkify from 'react-linkify';
-import { Card, CardActions, CardHeader, CardMedia, CardText } from 'material-ui/Card';
+import querystring from 'querystring';
+import LinkifyIt from 'linkify-it';
+import tlds from 'tlds';
+import MessageCard from '../../../components/MessageCard';
 
-const CARD_STYLE = {
-    marginBottom: 10,
-};
+const linkify = new LinkifyIt();
+linkify.tlds(tlds);
 
 class PostMessage extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            mediaLoading: false,
+            media: null,
+        };
+    }
+
+    componentDidMount () {
+        const { message } = this.props;
+        if (message && message.content) {
+            this.checkMedia(message.content);
+        }
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.message && nextProps.message.content) {
+            this.checkMedia(nextProps.message.content);
+        }
+    }
+
+    checkMedia (text) {
+        console.log('checkMedia', text);
+        const matches = linkify.match(text);
+        if (matches && matches[0]) {
+            this.loadMedia(matches[0].url);
+        }
+    }
+
+    loadMedia (url) {
+        console.log('loadMedia', url);
+        this.setState({
+            mediaLoading: true,
+            media: null,
+        });
+        fetch('/scraper?' + querystring.stringify({ url }))
+            .then(result => result.json())
+            .then(result => {
+                console.log('result', result);
+                this.setState({
+                    mediaLoading: false,
+                    media: result.meta,
+                });
+            })
+            .catch(error => {
+                console.error(error.stack || error);
+                this.setState({
+                    mediaLoading: false,
+                    media: null,
+                });
+            });
+    }
+
     render () {
         const { message } = this.props;
+        const { media } = this.state;
         return (
-            <Card style={CARD_STYLE}>
-                <CardHeader
-                    title={message.addedBy.firstname}
-                    subtitle={(
-                        <FormattedDate
-                            year="numeric"
-                            month="long"
-                            day="numeric"
-                            hour="numeric"
-                            minute="numeric"
-                            value={new Date(Date.parse(message.addedOn))} />
-                    )} />
-                <CardText>
-                    {message.content.split('\n').map((line, index) => (
-                        <span key={index}>
-                            <Linkify>
-                                {line}
-                            </Linkify>
-                            <br />
-                        </span>
-                    ))}
-                </CardText>
-            </Card>
+            <MessageCard
+                text={message.content}
+                author={message.addedBy.firstname}
+                date={new Date(Date.parse(message.addedOn))}
+                media={media} />
         );
     }
 }
