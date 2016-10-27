@@ -1,6 +1,6 @@
 {
   "name": "@phoenixmusical/web-client",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Phoenix Musical's Web Client",
   "main": "index.js",
   "scripts": {
