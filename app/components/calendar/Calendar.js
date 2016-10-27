@@ -34,7 +34,7 @@ export default class Calendar extends Component {
                     <CalendarDay
                         key={date.getDay()}
                         date={date}
-                        events={daysMap[date.getDay()]} />
+                        events={daysMap[date.getDay()] || []} />
                 ))}
             </div>
         );

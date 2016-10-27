@@ -36,7 +36,7 @@ class HomePageCalendar extends Component {
         return (
             <Calendar
                 events={app.events}
-                startDate={new Date(Date.parse(relay.variables.startDate))}
+                startDate={new Date(Date.parse(relay.variables.startDate.split(' ').shift()))}
                 onNextWeek={() => this.offsetDate(+7)}
                 onPreviousWeek={() => this.offsetDate(-7)} />
         );
